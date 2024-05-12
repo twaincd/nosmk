@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>twain - homepage</title>
+</head>
+
+<style>
+    body {
+        background-color: rgb(249, 251, 255);
+    }
+
+    .container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    .text {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 13px;
+        letter-spacing: -0.32px;
+        font-weight: 500;
+        color: #6c6c6c;
+        line-height: 0px;
+    }
+
+    h1 {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 24px;
+        letter-spacing: -0.32px;
+        font-weight: 600;
+        color: #000;
+        line-height: 0px;
+    }
+
+    p {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-size: 10px;
+        letter-spacing: -0.32px;
+        font-weight: 400;
+        color: #969696;
+        line-height: 0px;
+    }
+
+    .icon { 
+        height: 32px;
+        width: auto;
+    }
+
+    .ben {
+        height: 64px;
+        opacity: 0.6;
+        -webkit-filter: grayscale(1);
+        transition: ease-out 256ms;
+        bottom: 0;
+    }
+
+    .ben:hover {
+        opacity: 10;
+        transform: scale(1.4);
+        -webkit-filter: none;
+        transition: ease-in 256ms;
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="icon">
+            <img src="heart.circle.fill.svg" alt="" srcset="">
+        </div>
+        <h1>Sigara kullanmıyorum</h1>
+        <div class="text" id="geçenZaman"></div>
+        <p></p>
+        <img class="ben" src="ben.png" alt="">
+    </div>
+
+   
+    
+    <script>
+        // Sigarayı bıraktığınız tarihi ve saati aşağıdaki formatta girin
+        const bırakmaTarihi = new Date('2024-05-12T12:00:00'); // Örnek: 'YYYY-MM-DDTHH:MM:SS'
+
+        // Geçen zamanı güncellemek için bir fonksiyon tanımlayın
+        function güncelleGeçenZaman() {
+            const şuAn = new Date();
+            const geçenZamanMilisaniye = şuAn - bırakmaTarihi;
+
+            const gün = Math.floor(geçenZamanMilisaniye / (1000 * 60 * 60 * 24));
+            const saat = Math.floor((geçenZamanMilisaniye % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const dakika = Math.floor((geçenZamanMilisaniye % (1000 * 60 * 60)) / (1000 * 60));
+            const saniye = Math.floor((geçenZamanMilisaniye % (1000 * 60)) / 1000);
+
+            const geçenZamanMetin = `${gün} gün, ${saat} saat, ${dakika} dakika, ${saniye} saniye geçti`;
+            document.getElementById('geçenZaman').textContent = geçenZamanMetin;
+        }
+
+        // İlk çalıştırma
+        güncelleGeçenZaman();
+
+        // Her saniyede bir zamanı güncelleyin
+        setInterval(güncelleGeçenZaman, 1000); // 1000 milisaniye (1 saniye) aralıklarla çalıştır
+    </script>
+</body>
+</html>
